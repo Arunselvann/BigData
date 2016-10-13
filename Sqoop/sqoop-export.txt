@@ -1,0 +1,3 @@
+Normal Export:
+sqoop export --connect jdbc:mysql://localhost:3306/crime --table dept --username arun --password arun --table emp1 --export-dir /user/hduser/emp
+

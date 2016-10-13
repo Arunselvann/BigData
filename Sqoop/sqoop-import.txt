@@ -1,0 +1,42 @@
+Normal Import:
+sqoop import --connect jdbc:mysql://localhost:3306/crime --table dept --username arun --password arun --m 1 --target-dir /a
+
+Option file Import:
+sqoop --options-file /home/hduser/import.txt --table emp --m 1 --target-dir /emp
+
+Append Import:
+sqoop --options-file /home/hduser/import.txt --append --table emp --m 1 --target-dir /emp
+
+Only Specific column:
+sqoop --options-file /home/hduser/import.txt --table emp --columns "empno,ename,job" --m 1 --target-dir /emp
+
+Direct import:
+sqoop --options-file /home/hduser/import.txt --table emp --columns "empno,ename,job" --direct --m 1 --target-dir /emp
+
+Warehouse-dir:
+sqoop --options-file /home/hduser/import.txt --table emp --columns "empno,ename,job"  --m 1 --warehouse-dir /emp
+
+Where clause:
+sqoop --options-file /home/hduser/import.txt --table emp --columns "empno,ename,job" --where "deptno=30" --m 1 --target-dir /emp
+
+sqoop import --bindir ./ --connect jdbc:mysql://localhost:3306/crime --username arun --password arun --append \
+--query 'select a.empno,a.deptno from emp a inner join dept b on a.deptno=b.deptno WHERE $CONDITIONS' --m 1 --target-dir /emp
+
+sqoop --options-file /home/hduser/import.txt --incremental lastmodified --check-column deptno --last-value 30 --table emp --m 1 --target-dir /emp
+
+#Option file
+import
+--bindir
+./
+--connect
+jdbc:mysql://localhost:3306/crime
+--table
+emp
+--username
+arun
+--password
+arun
+
+
+
+sqoop import-all-tables --connect jdbc:mysql://localhost:3306/crime --username arun --password arun --m 1
